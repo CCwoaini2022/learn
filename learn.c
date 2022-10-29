@@ -6,77 +6,34 @@
 #include < stdlib.h >
 #include <time.h>
 
-
-//猜数字游戏
-//1.电脑会自动生成一个随机数
-//2.猜数字
-
-void menu()
+int Zs(int arr[],int k,int sz)
 {
-	printf("#####################################\n");
-	printf("########1.play    0.exit   ##########\n");
-	printf("#####################################\n");
-}
-
-void game()
-{
-	//1.生成一个随机数
-	int ret = 0;
-	int guess= 0;
-	ret=rand()%100;//生成1-100之间的数
-	//printf("%d\n", ret); 
-	//2.猜数字
-	printf("请猜数字:>\n");
-	while (1)
+	int left = 0;
+	int mid = 0;
+	int right = sz - 1;
+	while (left <= right)
 	{
-		
-		scanf("%d", &guess);
-		if (guess< ret)
-		{
-			
-			printf("小了\n");
-			printf("请重新输入\n");
-		}
-		else if (guess > ret)
-		{
-			printf("大了\n");
-			printf("请重新输入\n");
-		}
+		int mid = (left + right)/2;
+		if (k < arr[mid])
+			right = mid - 1;
+		else if (k > arr[mid])
+			left = mid + 1;
 		else
-		{
-			printf("恭喜你，答对了！\n");
-			break;
-		}
-			
+			return mid;
 	}
+	return -1;
 }
-
-
-//
 int main()
 {
-
-	srand((unsigned int)time(NULL));	//拿时间戳设置随机数的生成起始点
-	int input = 0;
-	do
-	{
-		menu();
-		printf("请选择:>\n");
-		scanf("%d", &input);
-		switch (input)
-		{
-		case 1:
-			game();//猜数字游戏
-			break;
-		case 0:
-			printf("退出游戏\n");
-			break;
-		default:
-			printf("选择错误\n");
-			break;
-		}
-	} 
-	while (input);
+	int arr[10] = { 1,2,3,4,5,6,7,8,9,10 };
+	int sz = 0;
+	sz = sizeof(arr) / sizeof(arr[0]);
+	int k = 7;
+	int ret = Zs(arr, k,sz);
+	if (ret == -1)
+		printf("没找到数字的下标\n");
+	else
+		printf("找到了，下标是：%d\n", ret);
 	return 0;
 }
 
@@ -84,45 +41,120 @@ int main()
 
 
 
-
-
-
-
-//1*1=1
-//2*1=2 2*2=4
-//3*1=3 3*2=6 3*3=9
+//int Pdrn(int x)
+//{
+//	if (x % 4 == 0 && x % 100 != 0)
+//		return 1;//是闰年
+//	else if (x % 400 == 0)
+//		return 1;//是闰年
+//	else
+//		return 0;//不是闰年
+//}
+//
+//
 //int main()
 //{
-//	int i = 1;
-//	int j = 0;
-//	for (i = 1; i <= 9; i++)
+//	int year = 0;
+//	printf("请输入年份\n");
+//	scanf("%d", &year);
+//	if (Pdrn(year) == 1)
+//		printf("是闰年\n");
+//	else
+//		printf("不是闰年\n");
+//	return 0;
+//
+//}
+
+
+
+
+
+//int Pdss(int x)//
+//{
+//	int i = 0;
+//	for (i = 2; i <= sqrt(x); i++)
 //	{
-//		for (j = 1; j <= i; j++)
+//		if (x % i == 0)
 //		{
-//			printf("%d*%d=%-2d ", i, j,i*j);	//%-2d 向左对齐，不够就补空格		
+//			return 0;
 //		}
-//		printf("\n");
 //	}
+//	if (i > sqrt(x))
+//	{		
+//		return 1;
+//	}
+//}
+//
+//
+//
+//int main()
+//{
+//	int num = 0;
+//	scanf("%d", &num);
+//	if (Pdss(num) == 1)
+//		printf("是素数\n");
+//	else
+//		printf("不是素数\n");
 //	return 0;
 //}
 
 
+//void Change_num(int* pa, int* pb )
+//{
+//	int tmp = 0;
+//	tmp = *pa;
+//	*pa = *pb;
+//	*pb = tmp;
+//}
+//
+//int main()
+//{
+//	int num1 = 0;
+//	int num2 = 0;
+//	scanf("%d%d", &num1, &num2);
+//	printf("num1=%d num2=%d\n", num1, num2);
+//	Change_num(&num1, &num2);
+//	printf("num1=%d num2=%d\n", num1, num2);
+//	return 0;
+//}
+//int Max(int x, int y)
+//{
+//	if (x > y)
+//	{
+//		return x;
+//	}
+//	else if (x < y)
+//	{
+//		return y;
+//	}
+//	else
+//	{
+//		return x;
+//	}
+//}
+//
+//
+//int main()
+//{
+//	int num1 = 0;
+//	int num2 = 0;
+//	int ret = 0;
+//	scanf("%d%d", &num1, &num2);
+//	ret=Max(num1, num2);
+//	printf("max=%d\n", ret);
+//	return 0;
+//
+//}
 
 
 
 //int main()
 //{
-//	int arr[10] = { -1,-2,-3,-4,-5,-6,-7,-8,-9,-10 };
-//	int max = arr[0];
-//	int i = 0;
-//	int sz = sizeof(arr) / sizeof(arr[0]);
-//	for (i = 0; i < sz; i++)
-//	{
-//		if (arr[i] > max)
-//			max = arr[i];
-//	}
-//	printf("max=%d\n", max);
+//	char arr[] = "hello world";
+//	memset(arr, '*', 2);
+//	printf("%s\n", arr);
 //	return 0;
+//
 //}
 
 
@@ -130,44 +162,24 @@ int main()
 
 
 
-
-
-
-
-//int main()
-//{
-//	int i = 0;
-//	double sum = 0.0;
-//	int flag = 1;
-//	for (i = 1; i <= 100; i++)
-//	{
-//		sum = sum + flag*1.0 / i;
-//		flag = (-flag);
-//	}
-//	printf("sum=%lf\n", sum);
-//	return 0;
-//}
-
-
-
-
-//一个数%10得到它的个位，/10得到他的十位
 //int main()
 //{
 //
-//	int i = 0;
-//	int count = 0;
-//	for (i = 1; i <= 100; i++)
-//	{
-//		if (i%10==9)
-//		{
-//			count++;
-//		}
-//		if(i / 10 == 9)//只有上面的if不执行，才会执行else if,所以最后的结果会少统计一个，把else去掉就正确了
-//		{
-//			count++;
-//		}
-//	}
-//	printf("count=%d\n", count);
+//	char arr1[] = "bit";
+//	char arr2[20] = "######";
+//	strcpy(arr2, arr1);//字符串的复制
+//	printf("%s\n", arr2);
+//	return 0;
+//}
+
+
+
+
+//goto 语句
+//int main()
+//{
+//again:
+//	printf("chenchenwoaini\n");
+//	goto again;
 //	return 0;
 //}
