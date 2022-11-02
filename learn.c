@@ -6,158 +6,122 @@
 #include < stdlib.h >
 #include <time.h>
 
-int Zs(int arr[],int k,int sz)
+
+
+
+
+
+
+
+
+//数组名是什么；
+//数组名是首元素的地址，但是又两个例外
+//1.sizeof（数组名）；这里面的数组名代表整个数组，该表达式求的是整个数组的大小，单位是字节。
+//2.&数组名：这里面的数组名代表整个元素的数组，该表达式求的是整个数组的地址。
+
+//冒泡排序法
+
+void bubble_sort(int arr[],int sz)
 {
-	int left = 0;
-	int mid = 0;
-	int right = sz - 1;
-	while (left <= right)
+	
+	int i = 0;
+	for (i = 0; i < sz - 1; i++)//冒泡排序的趟数
 	{
-		int mid = (left + right)/2;
-		if (k < arr[mid])
-			right = mid - 1;
-		else if (k > arr[mid])
-			left = mid + 1;
-		else
-			return mid;
+		int j = 0;
+		int flag = 1;
+
+		for (j = 0; j <sz-1-i ; j++)//一趟冒泡排序的执行过程
+		{
+			if (arr[j] > arr[j + 1])
+			{
+				int tmp = arr[j];     //
+				arr[j] = arr[j + 1];  //交换
+				arr[j + 1] = tmp;     //
+				flag = 0;             //
+			}
+		}
+		if (flag == 1)
+			break; 
 	}
-	return -1;
 }
+
 int main()
 {
-	int arr[10] = { 1,2,3,4,5,6,7,8,9,10 };
-	int sz = 0;
-	sz = sizeof(arr) / sizeof(arr[0]);
-	int k = 7;
-	int ret = Zs(arr, k,sz);
-	if (ret == -1)
-		printf("没找到数字的下标\n");
-	else
-		printf("找到了，下标是：%d\n", ret);
+	
+	int arr[10] = { 9,8,7,6,5,4,3,2,1,0 };
+	int sz = sizeof(arr) / sizeof(arr[0]);//数组元素的个数
+	bubble_sort(arr,sz);
+	int a = 0;
+	for (a = 0; a < 10; a++)
+	{
+		printf("%d ", arr[a]);
+	}
 	return 0;
+
 }
 
 
 
 
 
-//int Pdrn(int x)
-//{
-//	if (x % 4 == 0 && x % 100 != 0)
-//		return 1;//是闰年
-//	else if (x % 400 == 0)
-//		return 1;//是闰年
-//	else
-//		return 0;//不是闰年
-//}
-//
-//
+
 //int main()
 //{
-//	int year = 0;
-//	printf("请输入年份\n");
-//	scanf("%d", &year);
-//	if (Pdrn(year) == 1)
-//		printf("是闰年\n");
-//	else
-//		printf("不是闰年\n");
-//	return 0;
-//
-//}
-
-
-
-
-
-//int Pdss(int x)//
-//{
+//	/*int arr[3][4];
+//	char ch[3][4];*/
+//	//初始化-创建的同时给赋值
+//	//int arr[3][4] = { 1,2,3,4,5,6,7,8,9,10,11,12 };
+//	int arr[][4] = { {1,2},{2,3} ,{3,4} };
 //	int i = 0;
-//	for (i = 2; i <= sqrt(x); i++)
+//	//int j = 0;
+//	int* p = &arr[0][0];
+//	for (i = 0; i < 12; i++)
 //	{
-//		if (x % i == 0)
+//		printf("%d ", *p);
+//		p++;
+//	}
+//	/*for (i = 0; i < 3; i++)
+//	{
+//		for (j = 0; j < 4; j++)
 //		{
-//			return 0;
+//			printf("&arr[%d][%d]=%p\n",i, j, &arr[i][j]);
 //		}
-//	}
-//	if (i > sqrt(x))
-//	{		
-//		return 1;
-//	}
+//	}*/
+//	return 0;
 //}
-//
-//
+
+
+
+
+//int Ycdy(int n)
+//{
+//	if (n > 9)
+//	{
+//		Ycdy(n / 10);
+//	}
+//	
+//	printf("%d ",n%10);
+//	return 0;
+//}
 //
 //int main()
 //{
-//	int num = 0;
+//	unsigned int num = 0;
+//	printf("请输入想要打印的数字\n");
 //	scanf("%d", &num);
-//	if (Pdss(num) == 1)
-//		printf("是素数\n");
-//	else
-//		printf("不是素数\n");
+//	Ycdy(num);//依次打印每一位数字
 //	return 0;
 //}
 
-
-//void Change_num(int* pa, int* pb )
-//{
-//	int tmp = 0;
-//	tmp = *pa;
-//	*pa = *pb;
-//	*pb = tmp;
-//}
-//
-//int main()
-//{
-//	int num1 = 0;
-//	int num2 = 0;
-//	scanf("%d%d", &num1, &num2);
-//	printf("num1=%d num2=%d\n", num1, num2);
-//	Change_num(&num1, &num2);
-//	printf("num1=%d num2=%d\n", num1, num2);
-//	return 0;
-//}
-//int Max(int x, int y)
-//{
-//	if (x > y)
-//	{
-//		return x;
-//	}
-//	else if (x < y)
-//	{
-//		return y;
-//	}
-//	else
-//	{
-//		return x;
-//	}
-//}
-//
-//
-//int main()
-//{
-//	int num1 = 0;
-//	int num2 = 0;
-//	int ret = 0;
-//	scanf("%d%d", &num1, &num2);
-//	ret=Max(num1, num2);
-//	printf("max=%d\n", ret);
-//	return 0;
-//
-//}
 
 
 
 //int main()
 //{
-//	char arr[] = "hello world";
-//	memset(arr, '*', 2);
-//	printf("%s\n", arr);
+//	printf("hehe\n");
+//	main();
 //	return 0;
-//
 //}
-
-
 
 
 
@@ -165,21 +129,7 @@ int main()
 //int main()
 //{
 //
-//	char arr1[] = "bit";
-//	char arr2[20] = "######";
-//	strcpy(arr2, arr1);//字符串的复制
-//	printf("%s\n", arr2);
-//	return 0;
-//}
-
-
-
-
-//goto 语句
-//int main()
-//{
-//again:
-//	printf("chenchenwoaini\n");
-//	goto again;
+//
+//	printf("%d", printf("%d", printf("%d", 43)));
 //	return 0;
 //}
